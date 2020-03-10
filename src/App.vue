@@ -18,10 +18,28 @@ export default {
   },
   mounted(){
     this.$store.dispatch('fectUser')
+    this.$store.dispatch('fectEvent')
+    this.$store.dispatch('fectRole')
+    this.$store.dispatch('fectEmployeeStatus')
+    this.$store.dispatch('fectJobRole')
+    this.$store.dispatch('fectAttendance')
+    this.$store.dispatch('fectLeaveRequest')
+    this.$store.dispatch('fectLeaveStatus')
+    this.$store.dispatch('fectEmployee')
+    this.$store.dispatch('fectApplicant')
   },
   computed:{
     ...mapGetters([
       'user',
+      'event',
+      'role',
+      'employeeStatus',
+      'jobRole',
+      'attendance',
+      'leaveRequest',
+      'leaveStatus',
+      'employee',
+      'applicant',
     ])
   },
 }

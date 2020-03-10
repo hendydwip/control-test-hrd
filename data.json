@@ -240,5 +240,16 @@
       "start_date" : "2020-03-01",
       "end_date" : "2020-03-02"
     }
+  ],
+
+  "attendance" : [
+    {
+      "id" : 1,
+      "employee" : 1,
+      "clock_in" : "-",
+      "clock_out" : "-",
+      "date" : "-"
+    }
   ]
+
 }    
