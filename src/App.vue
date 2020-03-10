@@ -9,12 +9,21 @@
 
 <script>
 import HeaderBar from './components/bar/Header.vue'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'App',
   components: {
     HeaderBar
-  }
+  },
+  mounted(){
+    this.$store.dispatch('fectUser')
+  },
+  computed:{
+    ...mapGetters([
+      'user',
+    ])
+  },
 }
 </script>
 
