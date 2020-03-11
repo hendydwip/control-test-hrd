@@ -21,7 +21,7 @@ export default {
       axios
         .put('http://localhost:3000/employees/'+state.addEmployee.id,state.addEmployee)
     }else{
-      alert('Kosong')
+      alert('Kosonging')
     }
   }  
 }
