@@ -21,7 +21,16 @@ export default {
       axios
         .put('http://localhost:3000/employees/'+state.addEmployee.id,state.addEmployee)
     }else{
-      alert('Kosonging')
+      alert('Kosongin')
     }
-  }  
+  },
+  delete({state}){
+    if(state.addEmployee){
+      axios
+        .delete('http://localhost:3000/employees/'+state.addEmployee.id)
+    }else{
+      alert('Kosongin')
+    }
+  },  
+
 }

@@ -54,10 +54,13 @@
     <div class='w-full py-4 flex flex-row'>
       <div @click='pusKuy()' class='p-4 rounded-lg mx-4 bg-blue-200 cursor-pointer'>
         Edit
-      </div>
+      </div>    
       <router-link to='/employees' class='p-4 rounded-lg mx-4 bg-blue-200 cursor-pointer'>
         Cancel
-      </router-link>        
+      </router-link>
+      <div @click='deleteKuy()' class='p-4 rounded-lg mx-4 bg-red-600 text-white cursor-pointer'>
+        Delete
+      </div>              
     </div>                       
 	</div>
 
@@ -168,6 +171,13 @@ export default {
         this.$store.dispatch('employee/add')
       }
       this.$router.push('/employees')
+    },
+    deleteKuy(){
+      this.add(this.dataKirim)
+      if(confirm("Delete Data ?")){
+        this.$store.dispatch('employee/delete')
+        this.$router.push('/employees')
+      }    
     },
     dataEdit(){
       var id = this.$route.params.id
