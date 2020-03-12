@@ -161,7 +161,8 @@ export default {
   },
   methods:{
     ...mapMutations({
-      add: 'employee/ADD_EMPLOYEE'
+      add: 'employee/ADD_EMPLOYEE',
+      addUser: 'user/ADD_USER'
     }),    
     pusKuy(){
       this.add(this.dataKirim)
@@ -174,8 +175,10 @@ export default {
     },
     deleteKuy(){
       this.add(this.dataKirim)
+      this.addUser(this.dataKirim)
       if(confirm("Delete Data ?")){
         this.$store.dispatch('employee/delete')
+        this.$store.dispatch('user/delete')
         this.$router.push('/employees')
       }    
     },

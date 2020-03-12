@@ -32,7 +32,6 @@ export default {
     ...mapGetters({
       user: 'user/user',
       event: 'event/event',
-      employee_status: 'employee_status/employee_status',
       role: 'role/role',
       applicant: 'applicant/applicant',
       attendance: 'attendance/attendance',
