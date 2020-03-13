@@ -1,12 +1,12 @@
 <template>
   <div class='w-full flex flex-col max-w-xl mx-auto'>
-    <div class='flex flex-row justify-end mb-8 w-full'>
+    <div v-if='roleUser[0].id === userLoginRole' class='flex flex-row justify-end mb-8 w-full'>
       <router-link to='/employees/add' class='p-4 rounded-lg bg-blue-200 cursor-pointer'>
         Add Employee
       </router-link>
     </div>
     <div class='w-full flex flex-row justify-between p-2 border-b'>
-      <div v-for='(index,key) in employee_status' :key='key' @click='filter = index.id' class='p-4 rounded-lg mx-4 bg-blue-200 cursor-pointer'>
+      <div v-for='(index,key) in employee_status' :key='key' @click='filter == index.id? filter="" : filter=index.id' :class='filter == index.id?"bg-blue-400":""' class='p-4 rounded-lg mx-4 bg-blue-200 cursor-pointer'>
         {{index.status}}
       </div>  
     </div>
@@ -22,7 +22,7 @@
       </div>
       <div class='flex flex-col justify-between p-1 w-1/5'>
         <router-link :to='"/employees/edit/"+index.id' class='p-1 m-1 text-center rounded-lg bg-blue-200 cursor-pointer'>Edit</router-link>
-        <div @click='modalSet(index.id)' class='p-1 m-1 text-center rounded-lg bg-blue-200 cursor-pointer'>Set User</div>
+        <div @click='modalSet(index.id)' v-if='roleUser[0].id === userLoginRole' class='p-1 m-1 text-center rounded-lg bg-blue-200 cursor-pointer'>Set User</div>
       </div>
 
     </div>
@@ -73,7 +73,7 @@
 
 <script>
 import Modal from '@/components/modal/modal.vue'
-import {mapGetters,mapMutations} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 export default {
   components:{
     Modal
@@ -84,8 +84,8 @@ export default {
       filter: 0,
       dataKirim:{
         id:'',
-        username:'original1',
-        password:'original1',
+        username:'',
+        password:'',
         role : 1      
       },
     }
@@ -97,6 +97,7 @@ export default {
   computed:{
     ...mapGetters({
       job_role: 'job_role/job_role',
+      roleUser: 'role/role',
       employee: 'employee/employee',
       employee_status: 'employee_status/employee_status',
     }),
@@ -108,17 +109,18 @@ export default {
         return tampung
       }
       return this.employee
+    },
+    userLoginRole(){
+      const data = window.$cookies.get('user')
+      return data.role
     }
   },
   methods:{
-    ...mapMutations({
-      add: 'user/ADD_USER'
-    }),     
+    ...mapActions({
+      addUpdate:'user/addOrUpdate'
+    }),
     reset(){
       this.modal = false
-      this.dataKirim.id = ''
-      this.dataKirim.username = 'original1'
-      this.dataKirim.password = 'original1'
     },
     modalSet(id){
       this.dataKirim.id = id
@@ -126,8 +128,7 @@ export default {
     },
     setUserEmployee(){
       if(this.dataKirim.username && this.dataKirim.password){
-        this.add(this.dataKirim)
-        this.$store.dispatch('user/addOrUpdate')
+        this.addUpdate(this.dataKirim)
         this.reset()
         return
       }

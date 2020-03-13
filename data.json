@@ -1,10 +1,10 @@
 {
   "users": [
     {
-      "id": 1,
-      "username": "original1",
-      "password": "original1",
-      "role": 1
+      "username": "admin",
+      "password": "admin",
+      "role": 1,
+      "id": 1
     },
     {
       "id": 2,

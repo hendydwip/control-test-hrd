@@ -58,7 +58,7 @@
       <router-link to='/employees' class='p-4 rounded-lg mx-4 bg-blue-200 cursor-pointer'>
         Cancel
       </router-link>
-      <div @click='deleteKuy()' class='p-4 rounded-lg mx-4 bg-red-600 text-white cursor-pointer'>
+      <div @click='deleteKuy()' v-if='roleUser[0].id === userLoginRole' class='p-4 rounded-lg mx-4 bg-red-600 text-white cursor-pointer'>
         Delete
       </div>              
     </div>                       
@@ -142,8 +142,13 @@ export default {
 		...mapGetters({
       job_role: 'job_role/job_role',
       employee_status: 'employee_status/employee_status',
+      roleUser: 'role/role',
       employee: 'employee/employee',
       }),
+    userLoginRole(){
+      const data = window.$cookies.get('user')
+      return data.role
+    }      
   },
   data(){
     return{

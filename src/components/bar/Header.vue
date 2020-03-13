@@ -11,17 +11,33 @@
     <router-link to='/leave' tag='li' class='menu-inactive' active-class='menu-active'><a> Leave Request </a></router-link>
   </ul>
   <div>
-    Tempat nama User
+    {{nameUser.name}}
   </div>
-  <div class='menu-inactive cursor-pointer'>
+  <div @click='logout' class='menu-inactive cursor-pointer'>
     Logout
   </div>
 </div>  
 </template>
 
 <script>
+import { mapActions,mapGetters } from 'vuex' // mapMutations,
 export default {
-
+  computed:{
+    ...mapGetters({
+      employee: 'employee/employee',
+    }),
+    nameUser(){
+      const nameUser = this.employee.filter((x)=>{
+        return x.id == window.$cookies.get('user').id
+      })
+      return nameUser[0]
+    }
+  },
+  methods: {
+    ...mapActions({
+      logout: 'user/logout',
+    }),
+  }
 }
 </script>
 

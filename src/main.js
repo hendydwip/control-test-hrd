@@ -1,12 +1,29 @@
 import Vue from 'vue'
 import App from './App.vue'
-import VueRouter from 'vue-router'
-import {routes} from './routes.js'
+import VueCookies from 'vue-cookies'
+import router from './routes'
 import {store} from './store/store.js'
 
-Vue.use(VueRouter)
-const router = new VueRouter({
-  routes
+Vue.use(VueCookies)
+
+router.beforeEach((to, from, next) => {
+
+  if (!to.meta.middleware) return next()
+  if( !store.state.user.userLogin && window.$cookies.isKey('user') ) store.dispatch('user/fetch', window.$cookies.get('user').id)
+  
+  const middleware = to.meta.middleware
+
+  const context = {
+    to,
+    from,
+    next,
+    store,
+  }
+
+  return middleware[0]({
+    ...context
+  })
+
 })
 
 Vue.config.productionTip = false

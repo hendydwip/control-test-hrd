@@ -1,26 +1,57 @@
-import Index from '@/components/page/employee/index.vue'
-import Employee from '@/components/page/employee/employee.vue'
-import EmployeeAdd from '@/components/page/employee/employeeAdd.vue'
+import Vue from 'vue'
+import Router from 'vue-router'
 
-export const routes = [
-  {
-    path: '/employees',
-    component: Index,
-    children:[
-      {
-        path: '',
-        component: Employee
-      },
-      {
-        path: 'add',
-        name: 'tambah',
-        component: EmployeeAdd
-      },    
-      {
-        path: 'edit/:id',
-        name: 'ubah',
-        component: EmployeeAdd
-      },          
-    ]
-  },    
-]
+import auth from '@/middlewares/auth'
+
+Vue.use(Router)
+
+export default new Router({
+  routes: [
+    {
+      path: '/employees',
+      meta: {
+        middleware: [
+          auth
+        ]
+      },        
+      component: () => import('@/components/page/employee/index.vue'),  
+      children:[
+        {
+          path: '',
+          meta: {
+            middleware: [
+              auth
+            ]
+          }, 
+          component: () => import('@/components/page/employee/employee.vue'),
+        },
+        {
+          path: 'add',
+          meta: {
+            middleware: [
+              auth
+            ]
+          }, 
+          name: 'tambah',
+          component: () => import('@/components/page/employee/employeeAdd.vue'),
+        },    
+        {
+          path: 'edit/:id',
+          meta: {
+            middleware: [
+              auth
+            ]
+          }, 
+          name: 'ubah',
+          component: () => import('@/components/page/employee/employeeAdd.vue'),
+        },          
+      ]
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/components/page/login/Login.vue')
+    }     
+  ]
+
+})

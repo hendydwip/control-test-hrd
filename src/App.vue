@@ -1,6 +1,6 @@
 <template>
   <div id="app" class='w-full'>
-    <div class='bg-gray-300 flex p-3 mb-8 justify-center w-full'>
+    <div v-if='$route.name !== "login"' class='bg-gray-300 flex p-3 mb-8 justify-center w-full'>
       <header-bar></header-bar>
     </div>
     <router-view></router-view>
@@ -18,8 +18,7 @@ export default {
   },
   mounted(){
     this.$store.dispatch('employee/fect')
-    this.$store.dispatch('job_role/fect')    
-    this.$store.dispatch('user/fect')
+    this.$store.dispatch('job_role/fect')
     this.$store.dispatch('event/fect')
     this.$store.dispatch('employee_status/fect')
     this.$store.dispatch('role/fect')
@@ -30,7 +29,6 @@ export default {
   },
   computed:{
     ...mapGetters({
-      user: 'user/user',
       event: 'event/event',
       role: 'role/role',
       applicant: 'applicant/applicant',
