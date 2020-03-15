@@ -27,6 +27,7 @@ export default {
       employee: 'employee/employee',
     }),
     nameUser(){
+      if(!this.employee) return ''
       const nameUser = this.employee.filter((x)=>{
         return x.id == window.$cookies.get('user').id
       })
