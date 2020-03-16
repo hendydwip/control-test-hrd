@@ -1,7 +1,7 @@
 <template>
 
 
-	<div v-if='$route.name == "ubah"' class='w-full max-w-xl mx-auto'>
+	<div v-if='$route.name == "ubah"' class='w-full max-w-4xl mx-auto'>
     <div class='w-full py-4 flex flex-row'>
       <div class='w-1/3'>Name</div>
       <div class='w-2/3'><input type="text" class='border w-full' v-model='dataKirim.name'></div>
@@ -67,7 +67,7 @@
 
 
 
-	<div v-else class='w-full max-w-xl mx-auto'>
+	<div v-else class='w-full max-w-4xl mx-auto'>
     <div class='w-full py-4 flex flex-row'>
       <div class='w-1/3'>Name</div>
       <div class='w-2/3'><input type="text" class='border w-full' v-model='dataKirim.name'></div>

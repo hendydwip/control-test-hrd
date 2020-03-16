@@ -216,11 +216,15 @@
   ],
   "attendance": [
     {
-      "id": 1,
-      "employee": 1,
-      "clock_in": "-",
-      "clock_out": "-",
-      "date": "-"
+      "date": "2020-3-16",
+      "data": [
+        {
+          "checkin": "17:40:22",
+          "checkout": "",
+          "user_id": 1
+        }
+      ],
+      "id": 1
     }
   ]
 }

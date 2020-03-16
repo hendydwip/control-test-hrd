@@ -1,5 +1,5 @@
 <template>
-  <div class='w-full flex flex-col max-w-xl mx-auto'>
+  <div class='w-full flex flex-col max-w-4xl mx-auto'>
     <div v-if='roleUser[0].id === userLoginRole' class='flex flex-row justify-end mb-8 w-full'>
       <router-link to='/employees/add' class='p-4 rounded-lg bg-blue-200 cursor-pointer'>
         Add Employee

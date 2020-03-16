@@ -16,6 +16,15 @@ export default new Router({
       },
     },
     {
+      path: '/attendance',
+      meta: {
+        middleware: [
+          auth
+        ]
+      },
+      component: () => import('@/components/page/attendance/index.vue'),  
+    },    
+    {
       path: '/employees',
       meta: {
         middleware: [

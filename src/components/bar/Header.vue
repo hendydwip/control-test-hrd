@@ -7,7 +7,7 @@
     <router-link to='/' tag='li' class='menu-inactive' active-class='menu-active' exact><a> Dashboard </a></router-link>
     <router-link to='/employees' tag='li' class='menu-inactive' active-class='menu-active'><a> Employees </a></router-link>
     <router-link to='/applicants' tag='li' class='menu-inactive' active-class='menu-active'><a> Applicants </a></router-link>
-    <router-link to='/attedance' tag='li' class='menu-inactive' active-class='menu-active'><a> Attedance </a></router-link>
+    <router-link to='/attendance' tag='li' class='menu-inactive' active-class='menu-active'><a> Attendance </a></router-link>
     <router-link to='/leave' tag='li' class='menu-inactive' active-class='menu-active'><a> Leave Request </a></router-link>
   </ul>
   <div>
