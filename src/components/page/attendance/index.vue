@@ -4,8 +4,8 @@
       <span>
         {{userLogin}}
       </span>
-      <button class='p-1 m-1 text-center text-white rounded-lg bg-blue-400 cursor-pointer' @click='pushCheckIn()'>Check in</button>
-      <button class='p-1 m-1 text-center text-white rounded-lg bg-red-400 cursor-pointer' @click='pushCheckIn()'>Check out</button>
+      <button class='p-1 m-1 text-center text-white rounded-lg bg-blue-400 cursor-pointer' @click='pushCheckIn("checkin")'>Check in</button>
+      <button class='p-1 m-1 text-center text-white rounded-lg bg-red-400 cursor-pointer' @click='pushCheckIn("checkout")'>Check out</button>
     </div>
   </div>
 </template>
@@ -31,7 +31,8 @@ export default {
   },
   methods:{
     ...mapActions({
-      addIn:'attendance/add'
+      addIn:'attendance/addIn',
+      addOut:'attendance/addOut'
     }),    
 
     setTime(){ 
@@ -44,11 +45,18 @@ export default {
       var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
       return date
     },
-    pushCheckIn(){
+    pushCheckIn(typeCheck){
       this.controlAttendance.date = this.setDate()
       this.controlAttendance.user_id = this.userLogin.id
       this.controlAttendance.checkin = this.setTime()
-      this.addIn(this.controlAttendance)
+      switch(typeCheck){
+        case 'checkin':
+          this.addIn(this.controlAttendance)
+          break
+        case 'checkout':
+          this.addOut(this.controlAttendance)
+          break
+          }
       // console.log(this.controlAttendance)
     }
   }

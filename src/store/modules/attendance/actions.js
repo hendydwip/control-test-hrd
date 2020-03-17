@@ -18,7 +18,7 @@ export default {
     
   },
 
-  async add({commit}, payload ) {
+  async addIn({commit}, payload ) {
     commit('SET_ATTENDANCE', '')
     const res = await axios.get('http://localhost:3000/attendance?date=' + payload.date + '&_limit=1')
     let tampung = ''
@@ -39,34 +39,65 @@ export default {
       }
       return      
     }
-
+    console.log(res.data[0].data)
     tampung = res.data
-    console.log(tampung,'asdasd')
-    // if(!userID.data.length && !res.data.length){
-    //   try {
-    //     await axios.post('http://localhost:3000/users',{
-    //       'username':payload.username,
-    //       'password':payload.password,
-    //       'role':payload.role
-    //     })
-    //   }catch(e){
-    //     console.log(e.response)
-    //   }
-    //   return
-    // }
+    var ketemu = false
+    var tampung1 = res.data[0].data.map(el => {
+      if(el.user_id == payload.user_id){
+          ketemu = true
+          return Object.assign({}, el, {checkin:payload.checkin})
+      }
+      return el
+    });
 
-    // if(userID.data.length && !res.data.length){
-    //   try {
-    //     await axios.put('http://localhost:3000/users/'+payload.id,{
-    //       'username':payload.username,
-    //       'password':payload.password,
-    //       'role':payload.role
-    //     })
-    //   }catch(e){
-    //     console.log(e.response)
-    //   }
-    //   return
-    // }
+    if(!ketemu) tampung1.push({checkout:"",checkin:payload.checkin,user_id:payload.user_id})
+    tampung[0].data = tampung1
+    console.log(tampung,'asdads')
+
+    try {
+      await axios.put('http://localhost:3000/attendance/'+tampung[0].id,tampung[0])
+    }catch(e){
+      console.log(e.response)
+    }
+  },
+
+
+  async addOut({commit}, payload ) {
+    commit('SET_ATTENDANCE', '')
+    const res = await axios.get('http://localhost:3000/attendance?date=' + payload.date + '&_limit=1')
+    let tampung = ''
+    console.log(res.data)
+    console.log(payload.date)
+    if(!res.data.length){
+      try {
+        await axios.post('http://localhost:3000/attendance',{
+          'date':payload.date,
+          'data':[{
+            'checkin':'',
+            'checkout':payload.checkin,
+            'user_id':payload.user_id
+          }]
+        })
+      }catch(e){
+        console.log(e.response)
+      }
+      return      
+    }
+    console.log(res.data[0].data)
+    tampung = res.data
+    var tampung1 = res.data[0].data.map(el => {
+      if(el.user_id == payload.user_id)
+          return Object.assign({}, el, {checkout:payload.checkin})
+      return el
+    });
+    tampung[0].data = tampung1
+    console.log(tampung,'asdads')
+
+    try {
+      await axios.put('http://localhost:3000/attendance/'+tampung[0].id,tampung[0])
+    }catch(e){
+      console.log(e.response)
+    }
   },
 
 }
