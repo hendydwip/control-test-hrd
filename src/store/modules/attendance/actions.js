@@ -18,8 +18,7 @@ export default {
     
   },
 
-  async addIn({commit}, payload ) {
-    commit('SET_ATTENDANCE', '')
+  async addIn({dispatch}, payload ) {
     const res = await axios.get('http://localhost:3000/attendance?date=' + payload.date + '&_limit=1')
     let tampung = ''
     console.log(res.data)
@@ -59,11 +58,12 @@ export default {
     }catch(e){
       console.log(e.response)
     }
+
+    dispatch('fect')
   },
 
 
-  async addOut({commit}, payload ) {
-    commit('SET_ATTENDANCE', '')
+  async addOut({dispatch}, payload ) {
     const res = await axios.get('http://localhost:3000/attendance?date=' + payload.date + '&_limit=1')
     let tampung = ''
     console.log(res.data)
@@ -85,11 +85,15 @@ export default {
     }
     console.log(res.data[0].data)
     tampung = res.data
+    var ketemu = false
     var tampung1 = res.data[0].data.map(el => {
-      if(el.user_id == payload.user_id)
-          return Object.assign({}, el, {checkout:payload.checkin})
+      if(el.user_id == payload.user_id){
+        ketemu = true 
+        return Object.assign({}, el, {checkout:payload.checkin})
+      }
       return el
     });
+    if(!ketemu) tampung1.push({checkout:payload.checkin,checkin:"",user_id:payload.user_id})
     tampung[0].data = tampung1
     console.log(tampung,'asdads')
 
@@ -98,6 +102,7 @@ export default {
     }catch(e){
       console.log(e.response)
     }
+    dispatch('fect')
   },
 
 }

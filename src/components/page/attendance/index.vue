@@ -7,20 +7,49 @@
       <button class='p-1 m-1 text-center text-white rounded-lg bg-blue-400 cursor-pointer' @click='pushCheckIn("checkin")'>Check in</button>
       <button class='p-1 m-1 text-center text-white rounded-lg bg-red-400 cursor-pointer' @click='pushCheckIn("checkout")'>Check out</button>
     </div>
+
+    <button class='m-4 p-4 border rounded-lg' @click='typeShow == "checkin"?typeShow = "checkout":typeShow = "checkin"'>Change Show</button>
+
+    <div class='flex flex-col w-full'>
+      <div class='flex flex-row'>
+        <div class='flex mx-4 w-1/6'>Employee</div>
+        <div class='flex mx-4 w-1/6' v-for='(parent,key) in attendance.slice(attendance.length-5,attendance.length)' :key='key'>
+          <div class='flex flex-col'>
+            <div>{{parent.date}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class='flex flex-col w-full'>
+        <div class='flex w-full flex-row' v-for='(item,key) in employee' :key='key'>
+          <div class='flex mx-4 w-1/6'>{{item.name}}</div>
+          <div class='flex mx-4 w-1/6' v-for='(parentemp,key) in attendance.slice(attendance.length-5,attendance.length)' :key='key'>
+            <div class='flex flex-col'>
+              <div>{{haveCheck(parentemp.data, item.id)?haveCheck(parentemp.data, item.id):"-"}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 export default {
   computed:{
     userLogin(){
       const data = window.$cookies.get('user')
       return data
-    }    
+    },
+    ...mapGetters({
+      attendance: 'attendance/attendance',
+      employee: 'employee/employee'
+    })  
   },
   data(){
     return{
+      typeShow: 'checkin',
       controlAttendance:{ 
         date:'',
         user_id: '',
@@ -34,6 +63,15 @@ export default {
       addIn:'attendance/addIn',
       addOut:'attendance/addOut'
     }),    
+
+    haveCheck(data, user_id){
+      const tampung = data.filter(x => {
+        return x.user_id == user_id
+      })
+      if(!tampung.length) return false
+      if(this.typeShow == 'checkin') return tampung[0].checkin
+      return tampung[0].checkout
+    },
 
     setTime(){ 
       var today = new Date();
@@ -57,7 +95,6 @@ export default {
           this.addOut(this.controlAttendance)
           break
           }
-      // console.log(this.controlAttendance)
     }
   }
 }
