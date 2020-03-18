@@ -160,18 +160,6 @@
       "schedule_pt": "2020-03-30",
       "schedule_int": "2020-03-29",
       "phone": "0812222000"
-    },
-    {
-      "id": 4,
-      "name": "Dennis",
-      "email": "dennis@mail.com",
-      "job_role": 1,
-      "gender": 2,
-      "birth_date": "1997-07-17",
-      "birth_place": "Jakarta",
-      "schedule_pt": "2020-03-30",
-      "schedule_int": "2020-03-29",
-      "phone": "0812222000"
     }
   ],
   "leave_status": [
