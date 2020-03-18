@@ -16,6 +16,15 @@ export default new Router({
       },
     },
     {
+      path: '/dashboard',
+      meta: {
+        middleware: [
+          auth
+        ]
+      },
+      component: () => import('@/components/page/dashboard/index.vue'),  
+    },    
+    {
       path: '/attendance',
       meta: {
         middleware: [

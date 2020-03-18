@@ -29,7 +29,7 @@ export default {
 
       dispatch( 'fetch', user.id )
       window.$cookies.set('user', user)
-      router.push('/')
+      router.push('/dashboard')
 
     } catch (error) {
       window.alert(error)

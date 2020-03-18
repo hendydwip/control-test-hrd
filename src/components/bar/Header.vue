@@ -4,7 +4,7 @@
     HRD Kayaknya
   </div>
   <ul class="flex">
-    <router-link to='/' tag='li' class='menu-inactive' active-class='menu-active' exact><a> Dashboard </a></router-link>
+    <router-link to='/dashboard' tag='li' class='menu-inactive' active-class='menu-active' exact><a> Dashboard </a></router-link>
     <router-link to='/employees' tag='li' class='menu-inactive' active-class='menu-active'><a> Employees </a></router-link>
     <router-link to='/applicants' tag='li' class='menu-inactive' active-class='menu-active'><a> Applicants </a></router-link>
     <router-link to='/attendance' tag='li' class='menu-inactive' active-class='menu-active'><a> Attendance </a></router-link>
