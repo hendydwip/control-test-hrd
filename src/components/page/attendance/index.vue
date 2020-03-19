@@ -10,10 +10,10 @@
     <div class='flex flex-col w-full capitalize my-4'>
       Showing Status : {{typeShow}}
     </div>
-    <div class='flex flex-col overflow-y-auto max-h-75 w-full'>
+    <div v-if='filterAttendance' class='flex flex-col overflow-y-auto max-h-75 w-full'>
       <div class='flex flex-row bg-gray-700 text-white'>
         <div class='flex border w-1/6 py-4 justify-center'>Employee</div>
-        <div class='flex border w-1/6 py-4' v-for='(parent,key) in attendance.slice(attendance.length-5,attendance.length)' :key='key'>
+        <div class='flex border w-1/6 py-4' v-for='(parent,key) in filterAttendance' :key='key'>
           <div class='text-center w-full'>{{parent.date}}</div>
         </div>
       </div>
@@ -21,7 +21,7 @@
       <div class='flex flex-col w-full'>
         <div class='flex w-full flex-row' v-for='(item,key) in employee' :key='key'>
           <div class='bg-gray-200 justify-center flex border text-blue-600 py-4 w-1/6'>{{item.name}}</div>
-          <div class='flex border w-1/6 py-4' v-for='(parentemp,key) in attendance.slice(attendance.length-5,attendance.length)' :key='key' :class='haveCheck(parentemp.data, item.id)?"bg-blue-500":"bg-red-500"'>
+          <div class='flex border w-1/6 py-4' v-for='(parentemp,key) in filterAttendance' :key='key' :class='haveCheck(parentemp.data, item.id)?"bg-blue-500":"bg-red-500"'>
             <div class='flex flex-col text-center text-white w-full'>
               <div>{{haveCheck(parentemp.data, item.id)?haveCheck(parentemp.data, item.id):"-"}}</div>
             </div>
@@ -43,7 +43,11 @@ export default {
     ...mapGetters({
       attendance: 'attendance/attendance',
       employee: 'employee/employee'
-    })  
+    }),
+    filterAttendance(){
+      if(!this.attendance.length) return ''
+      return this.attendance.slice(this.attendance.length-4,this.attendance.length)
+    }
   },
   data(){
     return{

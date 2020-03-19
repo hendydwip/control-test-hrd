@@ -14,6 +14,7 @@ export default new Router({
           auth
         ]
       },
+      redirect: '/dashboard'
     },
     {
       path: '/dashboard',
@@ -23,6 +24,15 @@ export default new Router({
         ]
       },
       component: () => import('@/components/page/dashboard/index.vue'),  
+    },
+    {
+      path: '/leave',
+      meta:{
+        middleware:[
+          auth
+        ]
+      },
+      component:() => import('@/components/page/leave/index.vue')
     },    
     {
       path: '/attendance',

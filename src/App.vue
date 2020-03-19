@@ -32,9 +32,7 @@ export default {
       event: 'event/event',
       role: 'role/role',
       applicant: 'applicant/applicant',
-      attendance: 'attendance/attendance',
-      leave_request: 'leave_request/leave_request',
-      leave_status: 'leave_status/leave_status',                        
+      attendance: 'attendance/attendance',                 
     })
   },
 }

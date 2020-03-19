@@ -200,6 +200,22 @@
       "description": "Mager jalan",
       "start_date": "2020-03-01",
       "end_date": "2020-03-02"
+    },
+    {
+      "status": 2,
+      "employee": 1,
+      "description": "wsdf",
+      "start_date": "2020-03-19",
+      "end_date": "2020-03-21",
+      "id": 4
+    },
+    {
+      "status": 2,
+      "employee": 1,
+      "description": "Corona anjay",
+      "start_date": "2020-03-20",
+      "end_date": "2020-03-27",
+      "id": 5
     }
   ],
   "attendance": [
@@ -234,6 +250,17 @@
         }
       ],
       "id": 3
+    },
+    {
+      "date": "2020-3-19",
+      "data": [
+        {
+          "checkin": "20:14:24",
+          "checkout": "20:14:25",
+          "user_id": 1
+        }
+      ],
+      "id": 4
     }
   ]
 }
