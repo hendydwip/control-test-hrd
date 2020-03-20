@@ -216,6 +216,14 @@
       "start_date": "2020-03-20",
       "end_date": "2020-03-27",
       "id": 5
+    },
+    {
+      "status": 2,
+      "employee": 3,
+      "description": "Kerja dirumah",
+      "start_date": "2020-03-20",
+      "end_date": "2020-03-27",
+      "id": 6
     }
   ],
   "attendance": [
@@ -261,6 +269,17 @@
         }
       ],
       "id": 4
+    },
+    {
+      "date": "2020-3-20",
+      "data": [
+        {
+          "checkin": "12:13:20",
+          "checkout": "12:24:30",
+          "user_id": 1
+        }
+      ],
+      "id": 5
     }
   ]
 }

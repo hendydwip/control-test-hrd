@@ -46,7 +46,7 @@ export default {
     }),
     filterAttendance(){
       if(!this.attendance.length) return ''
-      return this.attendance.slice(this.attendance.length-4,this.attendance.length)
+      return this.attendance.slice(this.attendance.length-5,this.attendance.length)
     }
   },
   data(){
