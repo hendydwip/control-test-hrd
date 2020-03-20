@@ -19,13 +19,18 @@
         <div class='w-1/6'>Leave Start - To</div>
         <div>{{leave.start_date}} - {{leave.end_date}}</div>
       </div>
-      <div class='flex flex-row'>
+      <div class='flex flex-row capitalize'>
         <div class='w-1/6'>Status</div>
         <div>{{filterLeaveStatus(leave.status).status}}</div>
       </div>
       <div class='flex flex-row'>
         <div class='w-1/6'>Description</div>
         <div>{{leave.description}}</div>
+      </div>
+      <div v-if='leave.status == 2' class='flex flex-row'>
+        <button v-if='userLoginRole == 1' @click='updateStatusLeave(leave.id,1)' class='p-2 text-white flex capitalize rounded-lg bg-blue-400 cursor-pointer'>Approve</button>
+        <button v-if='userLoginRole == 1' @click='updateStatusLeave(leave.id,3)' class='p-2 text-white flex capitalize rounded-lg bg-red-400 cursor-pointer'>Rejected</button>
+        <button v-if='leave.employee == userLogin.id' @click='deteleRequest(leave.id)' class='p-2 text-white flex capitalize rounded-lg bg-red-700 cursor-pointer'>Delete</button> 
       </div>
     </div>
 
@@ -125,8 +130,13 @@ export default {
   },
   methods:{
     ...mapActions({
-      add:'leave_request/add'
+      add:'leave_request/add',
+      updateStatus:'leave_request/updateStatus',
+      deteleRequest:'leave_request/delete'
     }),
+    updateStatusLeave(id,status){
+      this.updateStatus({id,status})
+    },
     addLeave(){
       this.dataKirim.employee = this.userLogin.id
       if(confirm("Sudah Yakin Cuti ?")) this.add(this.dataKirim)

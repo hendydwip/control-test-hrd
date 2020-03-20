@@ -22,4 +22,24 @@ export default {
     }
     dispatch('fect')
   },
+  async updateStatus({dispatch}, payload){
+    const res = await axios.get('http://localhost:3000/leave_requests?id=' + payload.id + '&_limit=1')
+    const tampung = res.data[0]
+    console.log(tampung.status)
+    tampung.status = payload.status
+    try {
+      await axios.put('http://localhost:3000/leave_requests/'+payload.id,tampung)
+    }catch(e){
+      console.log(e.response)
+    }
+    dispatch("fect")
+  },
+  async delete({dispatch}, payload){
+    try {
+      await axios.delete('http://localhost:3000/leave_requests/'+payload)
+    }catch(e){
+      console.log(e.response)
+    }
+    dispatch("fect")
+  }
 }

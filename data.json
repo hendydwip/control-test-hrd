@@ -178,14 +178,6 @@
   ],
   "leave_requests": [
     {
-      "id": 1,
-      "status": 2,
-      "employee": 1,
-      "description": "Pulang kampung",
-      "start_date": "2020-03-20",
-      "end_date": "2020-03-21"
-    },
-    {
       "id": 2,
       "status": 1,
       "employee": 2,
@@ -218,12 +210,20 @@
       "id": 5
     },
     {
-      "status": 2,
+      "status": 1,
       "employee": 3,
       "description": "Kerja dirumah",
       "start_date": "2020-03-20",
       "end_date": "2020-03-27",
       "id": 6
+    },
+    {
+      "status": 2,
+      "employee": 3,
+      "description": "Aduh Cuy",
+      "start_date": "2020-03-03",
+      "end_date": "2020-03-24",
+      "id": 7
     }
   ],
   "attendance": [
