@@ -28,10 +28,11 @@ export default {
     }),
     nameUser(){
       if(!this.employee) return ''
-      const nameUser = this.employee.filter((x)=>{
-        return x.id == window.$cookies.get('user').id
-      })
-      return nameUser[0]
+        if(!window.$cookies.isKey('user')) return ''
+        const nameUser = this.employee.filter((x)=>{
+          return x.id == window.$cookies.get('user').id
+        })
+        return nameUser[0]
     }
   },
   methods: {

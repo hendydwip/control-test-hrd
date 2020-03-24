@@ -160,6 +160,18 @@
       "schedule_pt": "2020-03-30",
       "schedule_int": "2020-03-29",
       "phone": "0812222000"
+    },
+    {
+      "name": "asdasd",
+      "email": "asdasd",
+      "job_role": 2,
+      "gender": "1",
+      "birth_date": "2020-03-11",
+      "birth_place": "adasdasdasd",
+      "schedule_pt": "",
+      "schedule_int": "2020-03-11",
+      "phone": "asdasd",
+      "id": 4
     }
   ],
   "leave_status": [

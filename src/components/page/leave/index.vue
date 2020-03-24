@@ -46,10 +46,11 @@
             </td>
 
             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium" v-if='leave.status == 2'>
-              <button v-if='userLoginRole == 1' @click='updateStatusLeave(leave.id,1)' class='p-2 text-white flex capitalize rounded-lg bg-blue-400 cursor-pointer'>Approve</button>
-              <button v-if='userLoginRole == 1' @click='updateStatusLeave(leave.id,3)' class='p-2 text-white flex capitalize rounded-lg bg-red-400 cursor-pointer'>Rejected</button>
-              <button v-if='leave.employee == userLogin.id' @click='deteleRequest(leave.id)' class='p-2 text-white flex capitalize rounded-lg bg-red-700 cursor-pointer'>Delete</button> 
+              <button v-if='userLoginRole == 1' @click='updateStatusLeave(leave.id,1)' class='p-2 justify-center my-1 text-white flex capitalize rounded-lg bg-blue-400 cursor-pointer w-full'>Approve</button>
+              <button v-if='userLoginRole == 1' @click='updateStatusLeave(leave.id,3)' class='p-2 justify-center my-1 text-white flex capitalize rounded-lg bg-red-400 cursor-pointer w-full'>Rejected</button>
+              <button v-if='leave.employee == userLogin.id' @click='deteleRequest(leave.id)' class='p-2 justify-center my-1 text-white flex capitalize rounded-lg bg-red-700 cursor-pointer w-full'>Delete</button> 
             </td>
+            <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium"  v-else></td>
           </tr>
         </tbody>
       </table>

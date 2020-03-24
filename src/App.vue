@@ -1,6 +1,6 @@
 <template>
   <div id="app" class='w-full'>
-    <div v-if='$route.name !== "login"' class='bg-gray-300 flex p-3 mb-8 justify-center w-full'>
+    <div v-if='$route.name !== "login" && $route.name !== "apply"' class='bg-gray-300 flex p-3 mb-8 justify-center w-full'>
       <header-bar></header-bar>
     </div>
     <router-view></router-view>

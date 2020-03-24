@@ -17,6 +17,20 @@ export default new Router({
       redirect: '/dashboard'
     },
     {
+      path:'/apply',
+      name: 'apply',
+      component: () => import('@/components/page/applicant/apply.vue'),  
+    },
+    {
+      path:'/applicants',
+      meta:{
+        middleware:[
+          auth
+        ]
+      },
+      component: () => import('@/components/page/applicant/index.vue'),  
+    },
+    {
       path: '/dashboard',
       meta: {
         middleware: [
