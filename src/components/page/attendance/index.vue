@@ -1,9 +1,9 @@
 <template>
   <div class='w-full flex flex-col max-w-4xl mx-auto w-full'>
-    <div class='flex flex-row justify-start w-full'>
+    <!-- <div class='flex flex-row justify-start w-full'>
       <button class='p-1 m-1 text-center text-white rounded-lg bg-blue-400 cursor-pointer' @click='pushCheckIn("checkin")'>Check in</button>
       <button class='p-1 m-1 text-center text-white rounded-lg bg-red-400 cursor-pointer' @click='pushCheckIn("checkout")'>Check out</button>
-    </div>
+    </div> -->
 
     <button class='m-4 p-4 bg-blue-400 text-white border rounded-lg w-1/6 mx-auto' @click='typeShow == "checkin"?typeShow = "checkout":typeShow = "checkin"'>Change Show</button>
     

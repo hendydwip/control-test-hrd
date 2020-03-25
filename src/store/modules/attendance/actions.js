@@ -9,15 +9,6 @@ export default {
       })
   },
 
-
-  async out({commit}, payload ){
-    commit('SET_ATTENDANCE', '')
-    const res = await axios.get('http://localhost:3000/attendance?date=' + payload.date + '&_limit=1')
-    console.log(res.data)
-    console.log(payload.date)
-    
-  },
-
   async addIn({dispatch}, payload ) {
     const res = await axios.get('http://localhost:3000/attendance?date=' + payload.date + '&_limit=1')
     let tampung = ''
@@ -36,7 +27,8 @@ export default {
       }catch(e){
         console.log(e.response)
       }
-      return      
+      dispatch('fect')
+      return
     }
     console.log(res.data[0].data)
     tampung = res.data
@@ -81,6 +73,7 @@ export default {
       }catch(e){
         console.log(e.response)
       }
+      dispatch('fect')
       return      
     }
     console.log(res.data[0].data)

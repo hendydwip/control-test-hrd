@@ -21,6 +21,20 @@
     </div>
 
     <div class="bg-gray-100 flex items-center justify-center w-full">
+      <div class='flex flex-col'>
+        <div class="p-4 bg-white rounded-t border-b text-center">Attendance</div>
+        <div class='shadow bg-gray-100 rounded p-4 w-full'>
+          <button class='p-1 m-1 text-center text-white rounded-lg bg-blue-400 cursor-pointer' @click='pushCheckIn("checkin")'>Check in</button>
+          <button class='p-1 m-1 text-center text-white rounded-lg bg-red-400 cursor-pointer' @click='pushCheckIn("checkout")'>Check out</button>
+          <div class='text-center w-full' v-if='getUserAttendance.length == true'>
+            <div>Checkin : {{getUserAttendance[0].checkin}}</div>
+            <div>Checkout : {{getUserAttendance[0].checkout}}</div>
+          </div>
+          <div class='text-center w-full' v-else>
+            You not attend today
+          </div>
+        </div>
+      </div>
       <div class="flex flex-col md:flex-row">
           <div class="md:w-full shadow bg-gray-100 rounded m-4">
               <div class="p-4 bg-white rounded-t border-b text-center">Upcoming Events</div>
@@ -55,7 +69,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters,mapActions} from 'vuex'
 export default {
   computed:{
     userLogin(){
@@ -68,6 +82,18 @@ export default {
     getApplicants(){
       return this.applicant
     },
+    getUserAttendance(){
+      if(!this.attendance.length) return ''
+      var tampung1 = this.attendance.filter(el => {
+        return el.date == this.setDate()
+      })
+      
+      var tampung2 = tampung1[0].data.filter(el => {
+        return el.user_id == this.userLogin.id
+      });
+
+      return tampung2
+    },
      ...mapGetters({
       employee: 'employee/employee',
       event: 'event/event',
@@ -78,46 +104,79 @@ export default {
   },
   data(){
     return{
-       
+      controlAttendance:{ 
+        date:'',
+        user_id: '',
+        checkin: '',
+      }
     }
   },
   methods:{
-      getEmployee(){
-        if(!this.employee.length) return 0
-        return this.employee.length
-      },
-      getAttendance(value){
-        if(!this.attendance.length) return
-        var att = 0 
-        const today = new Date()
-        const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
-        const tampung = this.attendance.filter((jr) => {
-            return jr.date == date
-        })
-        if(tampung.length > 0)
-          if(value == 1){
-            att = tampung[0].data.length
-          }else{
-            att = parseInt(this.employee.length) - parseInt(tampung[0].data.length)
+    ...mapActions({
+      addIn:'attendance/addIn',
+      addOut:'attendance/addOut'
+    }),
+    setTime(){ 
+      var today = new Date();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      return time
+    },
+    setDate(){
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      return date
+    },
+    pushCheckIn(typeCheck){
+      this.controlAttendance.date = this.setDate()
+      this.controlAttendance.user_id = this.userLogin.id
+      this.controlAttendance.checkin = this.setTime()
+      switch(typeCheck){
+        case 'checkin':
+          this.addIn(this.controlAttendance)
+          break
+        case 'checkout':
+          this.addOut(this.controlAttendance)
+          break
           }
-        return att
-      },
+    },
 
-      getGenderEmployee(gender){
-        if(!this.employee.length) return ''
-        const tampung = this.employee.filter((jr) => {
-          return jr.gender == gender
-        })
-        return tampung.length
-      },
 
-      position(id){
-        // if(!this.job_role.length) return ''
-        const tampung = this.job_role.filter((jr) => {  return jr.id == id })
-        console.log(tampung)
-        return tampung[0].position
-      }
+    getEmployee(){
+      if(!this.employee.length) return 0
+      return this.employee.length
+    },
+    getAttendance(value){
+      if(!this.attendance.length) return
+      var att = 0 
+      const today = new Date()
+      const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
+      const tampung = this.attendance.filter((jr) => {
+          return jr.date == date
+      })
+      if(tampung.length > 0)
+        if(value == 1){
+          att = tampung[0].data.length
+        }else{
+          att = parseInt(this.employee.length) - parseInt(tampung[0].data.length)
+        }
+      return att
+    },
+
+    getGenderEmployee(gender){
+      if(!this.employee.length) return ''
+      const tampung = this.employee.filter((jr) => {
+        return jr.gender == gender
+      })
+      return tampung.length
+    },
+
+    position(id){
+      // if(!this.job_role.length) return ''
+      const tampung = this.job_role.filter((jr) => {  return jr.id == id })
+      console.log(tampung)
+      return tampung[0].position
     }
+  }
 }
 </script>
 
