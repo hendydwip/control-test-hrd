@@ -6,8 +6,8 @@
     <div class="align-middle inline-block rounded min-w-full shadow overflow-hidden border-b border-gray-200">
       <div class="border-b border-gray-300 text-center bg-white pt-4 shadow rounded-t">
         <div class='flex justify-between mb-4 w-full'>
-          <button v-for='(item,key) in leave_status' :key='key' @click='filter == item.id? filter="" : filter=item.id' :class='filter == item.id?"bg-blue-600":""' class='p-4 text-white flex capitalize rounded-lg mx-4 bg-blue-400 cursor-pointer'>{{item.status}}</button>
-          <div class='capitalize my-4'>
+          <button v-for='(item,key) in leave_status' :key='key' @click='filter == item.id? filter="" : filter=item.id' :class='filter == item.id?"bg-blue-600":""' class='p-4 capitalize rounded-lg mx-4 bg-blue-200 cursor-pointer'>{{item.status}}</button>
+          <div class='p-4 rounded-lg capitalize mx-4'>
             Showing : {{filter?leave_status[filter-1].status:'All'}}
           </div>
         </div>
@@ -105,7 +105,6 @@ export default {
   computed:{
     userLogin(){
       const data = window.$cookies.get('user')
-      console.log(data)
       return data
     },
     userLoginRole(){
@@ -177,7 +176,6 @@ export default {
       const tampung = this.leave_status.filter((jr) => {
         return jr.id == idnya
       })
-      console.log(tampung)
       return tampung[0]
     }
   }

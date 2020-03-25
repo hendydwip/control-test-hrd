@@ -173,7 +173,6 @@ export default {
     position(id){
       // if(!this.job_role.length) return ''
       const tampung = this.job_role.filter((jr) => {  return jr.id == id })
-      console.log(tampung)
       return tampung[0].position
     }
   }

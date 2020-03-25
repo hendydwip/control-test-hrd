@@ -22,7 +22,7 @@ export default {
     }
   },
   async login( { dispatch }, payload ) {
-    console.log(payload)
+
     try {
       const res = await axios.get('http://localhost:3000/users?name=' + payload.name + '&password=' + payload.password + '&_limit=1')
       const user = res.data[0]

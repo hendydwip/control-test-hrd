@@ -12,8 +12,6 @@ export default {
   async addIn({dispatch}, payload ) {
     const res = await axios.get('http://localhost:3000/attendance?date=' + payload.date + '&_limit=1')
     let tampung = ''
-    console.log(res.data)
-    console.log(payload.date)
     if(!res.data.length){
       try {
         await axios.post('http://localhost:3000/attendance',{
@@ -30,7 +28,7 @@ export default {
       dispatch('fect')
       return
     }
-    console.log(res.data[0].data)
+
     tampung = res.data
     var ketemu = false
     var tampung1 = res.data[0].data.map(el => {
@@ -43,7 +41,6 @@ export default {
 
     if(!ketemu) tampung1.push({checkout:"",checkin:payload.checkin,user_id:payload.user_id})
     tampung[0].data = tampung1
-    console.log(tampung,'asdads')
 
     try {
       await axios.put('http://localhost:3000/attendance/'+tampung[0].id,tampung[0])
@@ -58,8 +55,7 @@ export default {
   async addOut({dispatch}, payload ) {
     const res = await axios.get('http://localhost:3000/attendance?date=' + payload.date + '&_limit=1')
     let tampung = ''
-    console.log(res.data)
-    console.log(payload.date)
+
     if(!res.data.length){
       try {
         await axios.post('http://localhost:3000/attendance',{
@@ -76,7 +72,7 @@ export default {
       dispatch('fect')
       return      
     }
-    console.log(res.data[0].data)
+
     tampung = res.data
     var ketemu = false
     var tampung1 = res.data[0].data.map(el => {
@@ -88,7 +84,6 @@ export default {
     });
     if(!ketemu) tampung1.push({checkout:payload.checkin,checkin:"",user_id:payload.user_id})
     tampung[0].data = tampung1
-    console.log(tampung,'asdads')
 
     try {
       await axios.put('http://localhost:3000/attendance/'+tampung[0].id,tampung[0])
