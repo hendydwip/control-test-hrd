@@ -42,8 +42,8 @@
                 <table class="table-auto w-full bg-white border text-sm">
                     <tr v-for='(index,key) in event' :key='key'>
                       <td class="px-4 py-2 border-b"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></td>
-                      <td class="px-4 py-2 border-b">{{index.date}}</td>
-                      <td class="px-4 py-2 border-b">{{index.description}}</td>
+                      <td class="px-4 py-2 border-b" :class="checkEvent(index.date) === true?'text-green-700 underline':''">{{index.date}}</td>
+                      <td class="px-4 py-2 border-b" :class="checkEvent(index.date) === true?'text-green-700 underline':''">{{index.description}}</td>
                     </tr>
                 </table>
               </div>
@@ -54,7 +54,7 @@
           <div class="p-4 bg-white rounded-t border-b text-center">New Applicant</div>
           <div class="p-4">
             <table class="table-auto w-full bg-white border text-sm">
-              <tr v-for='(index,key) in applicant' :key='key'>
+              <tr v-for='(index,key) in applicant' :key='key' >
                 <td class="px-4 py-2 border-b"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></td>
                 <td class="px-4 py-2 border-b">{{index.name}}</td>
                 <td class="px-4 py-2 border-b">{{position(index.job_role)}}</td>
@@ -87,7 +87,9 @@ export default {
       var tampung1 = this.attendance.filter(el => {
         return el.date == this.setDate()
       })
-      
+
+      if(!tampung1.length) return ''
+
       var tampung2 = tampung1[0].data.filter(el => {
         return el.user_id == this.userLogin.id
       });
@@ -116,6 +118,17 @@ export default {
       addIn:'attendance/addIn',
       addOut:'attendance/addOut'
     }),
+    checkEvent(date){
+      var GivenDate = date
+      var CurrentDate = new Date();
+      GivenDate = new Date(GivenDate);
+
+      if(GivenDate > CurrentDate){
+          return true
+      }else{
+          return false
+      }
+    },
     setTime(){ 
       var today = new Date();
       var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();

@@ -45,20 +45,26 @@
               <div v-if='index.schedule_int'>
                 Interview : {{index.schedule_int}}
               </div>
-              <div v-else>
+              <div v-else-if='roleUser[0].id === userLoginRole'>
                 Set Interview :
                 <input v-model='date' class='border mx-2' type="date" name="" id="">
                 <button class='bg-blue-600 p-2 rounded text-white' @click='interview({id:index.id,schedule_int:date})'>Add Interview</button>
+              </div>
+              <div v-else>
+                Interview : -
               </div>
             </div>
             <div class="text-sm leading-5 text-gray-900" v-if='index.schedule_int'>
               <div v-if='index.schedule_pt'>
                 Psycho Test : {{index.schedule_pt}}
               </div>
-              <div v-else>
+              <div v-else-if='roleUser[0].id === userLoginRole'>
                 Set Psycho Test :
                 <input v-model='date' class='border mx-2' type="date" name="" id="">
                 <button class='bg-blue-600 p-2 rounded text-white' @click="psychotest({id:index.id,schedule_pt:date})">Add Psycho Test</button>
+              </div>
+              <div v-else>
+                Psycho Test : -
               </div>            
             </div>
           </td>
@@ -78,8 +84,13 @@ export default {
   computed:{
     ...mapGetters({
       applicant: 'applicant/applicant',
-      job_role: 'job_role/job_role',           
+      job_role: 'job_role/job_role',
+      roleUser: 'role/role',        
     }),
+    userLoginRole(){
+      const data = window.$cookies.get('user')
+      return data.role
+    },
     filterApplicant(){
       var tampung
       switch(this.filter){

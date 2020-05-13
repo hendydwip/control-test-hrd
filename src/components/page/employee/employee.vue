@@ -38,7 +38,8 @@
           </td>
 
           <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-              <router-link :to='"/employees/edit/"+index.id' class='flex justify-center p-1 m-1 text-center rounded-lg bg-blue-200 cursor-pointer'>Edit User</router-link>
+              <router-link :to='"/employees/edit/"+index.id' v-if='roleUser[0].id !== userLoginRole && index.id === userId' class='flex justify-center p-1 m-1 text-center rounded-lg bg-blue-200 cursor-pointer'>Edit User</router-link>
+              <router-link :to='"/employees/edit/"+index.id' v-else-if="roleUser[0].id === userLoginRole" class='flex justify-center p-1 m-1 text-center rounded-lg bg-blue-200 cursor-pointer'>Edit User</router-link>
               <div @click='modalSet(index.id)' v-if='roleUser[0].id === userLoginRole' class='flex justify-center p-1 m-1 text-center rounded-lg bg-blue-200 cursor-pointer'>Set User</div>
           </td>
         </tr>
@@ -107,7 +108,8 @@ export default {
   },
   mounted(){
     this.$store.dispatch('employee/fect')
-    this.$store.dispatch('job_role/fect')        
+    this.$store.dispatch('job_role/fect')
+    this.$store.dispatch('role/fect')
   },
   computed:{
     ...mapGetters({
@@ -128,6 +130,10 @@ export default {
     userLoginRole(){
       const data = window.$cookies.get('user')
       return data.role
+    },
+    userId(){
+      const data = window.$cookies.get('user')
+      return data.id
     }
   },
   methods:{
